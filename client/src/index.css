@@ -1,0 +1,148 @@
+* {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  width: 100vw;
+  background-color: #cac4ce;
+}
+header {
+  display: flex;
+  background-color: #9067c6;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0.5rem;
+  > nav {
+    background-color: #242038;
+    padding: 0.5rem;
+    border-radius: 5px;
+    margin-left: 3rem;
+
+    > a {
+      margin: 0.5rem;
+      color: #f7ece1;
+      border-radius: 5px;
+      padding: 0.2rem;
+    }
+    > a:hover {
+      color: #242038;
+      background-color: #8d86c9;
+    }
+  }
+}
+.tagbar {
+  display: flex;
+  padding: 0.5rem;
+  background-color: #8d86c998;
+  > input {
+    margin-right: 0.5rem;
+    width: 100px;
+  }
+  > nav {
+    width: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    > a {
+      color: #f7ece1;
+      text-decoration: none;
+      margin-right: 0.2rem;
+    }
+    > a:hover {
+      color: #242038;
+    }
+  }
+  > nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+.flex-center {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.content-box {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+
+  > h2,
+  h3 {
+    color: #9067c6;
+    margin-bottom: 0.5rem;
+  }
+  > select {
+    width: 150px;
+    margin-bottom: 0.5rem;
+  }
+  > form {
+    display: flex;
+    background-color: #8d86c965;
+    border-radius: 10px;
+    flex-direction: column;
+    padding: 2rem;
+    > input {
+      height: 4rem;
+    }
+    > * {
+      margin: 0.25rem;
+    }
+    > .tags {
+      > input {
+        width: 100%;
+      }
+    }
+    > .title {
+      > input {
+        width: 100%;
+      }
+    }
+  }
+}
+.post-area {
+  height: 77vh;
+  overflow: auto;
+}
+.post-box {
+  margin: 0.25rem 0;
+  position: relative;
+  background-color: #8d86c9;
+  border-radius: 10px;
+  border: 5px solid #242038;
+  > * {
+    margin: 0 1rem;
+  }
+  > h3 {
+    margin: 0.1rem 0.1rem;
+    padding: 0.25rem;
+    border-radius: 5px;
+    background-color: #242038;
+  }
+  > button {
+    position: absolute;
+    margin-top: 0.5rem;
+    right: 0;
+    top: 0;
+  }
+  > button:hover {
+    cursor: pointer;
+    background-color: red;
+  }
+  > nav {
+    width: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-bottom: 0.5rem;
+    > a {
+      color: #f7ece1;
+      text-decoration: none;
+      margin-right: 0.2rem;
+    }
+    > a:hover {
+      color: #242038;
+    }
+  }
+}

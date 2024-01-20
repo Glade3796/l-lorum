@@ -1,15 +1,21 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import NewCategory from "../components/NewCategory";
 
-export default function WritePost() {
+export default function WritePost({
+  categoryOptions,
+  handleGetCategories,
+  showNewCat,
+  setShowNewCat,
+}) {
   const [formVal, setFormVal] = useState({
     title: "",
     content: "",
-    tags: "#noTag",
+    tags: "tag",
     category: 1,
   });
-  const [categories, setCategories] = useState([]);
-
+  const [submitted, setSubmitted] = useState(false);
   async function handleSubmit(event) {
+    setSubmitted(true);
     event.preventDefault();
     console.log("Form values: ", formVal);
     const res = await fetch("http://localhost:3333/writepost", {
@@ -17,42 +23,50 @@ export default function WritePost() {
       headers: { "content-type": "application/json" },
       body: JSON.stringify(formVal),
     });
-    const json = await res.json();
-    console.log(json);
+    setFormVal({
+      title: "",
+      content: "",
+      tags: "tag",
+      category: 1,
+    });
+
+    setTimeout(() => {
+      setSubmitted(false);
+    }, 700);
+  }
+  function handleChange(event) {
+    const { name, value } = event.target;
+
+    if (name === "tags") {
+      // If the target is the 'tags' field, split the string into an array
+      const tagsArray = value.split(/[^a-zA-Z0-9]+/).map((tag) => tag.trim());
+      setFormVal((prevFormVal) => ({
+        ...prevFormVal,
+        [name]: tagsArray,
+      }));
+    } else {
+      // For other fields, update the form value as usual
+      setFormVal((prevFormVal) => ({
+        ...prevFormVal,
+        [name]: value,
+      }));
+    }
   }
 
-  function handleChange(event) {
-    setFormVal({
-      ...formVal,
-      [event.target.name]: event.target.value,
-    });
-  }
-  //fetch categories
-  async function handleGetCategories() {
-    const res = await fetch("http://localhost:3333/categories");
-    const data = await res.json();
-    setCategories(data);
-  }
-  useEffect(() => {
-    handleGetCategories();
-  }, []);
-  const categoryOptions = categories.map((category) => (
-    <option value={category.id} key={category.id + category.name}>
-      {category.name}
-    </option>
-  ));
   return (
-    <div>
+    <div className="content-box">
       <h2>Write Post</h2>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="title">Post title:</label>
-        <input
-          type="text"
-          name="title"
-          id="title"
-          onChange={handleChange}
-          value={formVal.title}
-        />
+        <div className="title">
+          <label htmlFor="title">Post title:</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            onChange={handleChange}
+            value={formVal.title}
+          />
+        </div>
         <label htmlFor="content">Write your message here:</label>
         <input
           type="text"
@@ -61,28 +75,47 @@ export default function WritePost() {
           onChange={handleChange}
           value={formVal.content}
         />
-        <label htmlFor="tags">tags:</label>
-        <input
-          type="text"
-          name="tags"
-          id="tags"
-          placeholder="separate with commas"
-          onChange={handleChange}
-          value={formVal.tags}
-        />
-        <select
-          name="category"
-          onChange={handleChange}
-          value={formVal.category || 1}
-          required
-        >
-          {categoryOptions}
-        </select>
-        <button type="submit">Post</button>
+        <div>
+          <label htmlFor="tags">tags:</label>
+          <input
+            type="text"
+            name="tags"
+            id="tags"
+            placeholder="separate with commas"
+            onChange={handleChange}
+            value={formVal.tags}
+          />
+        </div>
+        <div>
+          {showNewCat && (
+            <NewCategory
+              setShowNewCat={setShowNewCat}
+              handleGetCategories={handleGetCategories}
+            />
+          )}
+          <select
+            name="category"
+            onChange={handleChange}
+            value={formVal.category || 1}
+            required
+            hidden={showNewCat}
+          >
+            {categoryOptions}
+          </select>
+          <button
+            onClick={(event) => {
+              event.preventDefault();
+              setShowNewCat(!showNewCat);
+            }}
+          >
+            {!showNewCat ? "add category" : "cancel"}
+          </button>
+        </div>
+        <button disabled={showNewCat} type="submit">
+          Post
+        </button>
+        {submitted && <p>post submitted!</p>}
       </form>
-      <h3>{formVal.title}</h3>
-      <p>{formVal.content}</p>
-      <p>{formVal.category}</p>
     </div>
   );
 }

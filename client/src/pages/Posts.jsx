@@ -1,21 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import PostBox from "../components/PostBox";
 
-export default function Posts() {
-  const [posts, setPosts] = useState([]);
+export default function Posts({
+  posts,
+  categoryOptions,
+  currCategory,
+  setCurrCategory,
+  handleGetCategories,
+  handleGetPosts,
+}) {
   //fetch posts
-  async function handleGetPosts() {
-    const res = await fetch("http://localhost:3333/posts-tags-categories");
-    const data = await res.json();
-    setPosts(data);
+  console.log("posts curr cat", currCategory);
+  //category selection
+  function handleChange(event) {
+    setCurrCategory(event.target.value);
+    console.log(currCategory);
   }
   useEffect(() => {
-    handleGetPosts();
-  }, []);
+    console.log("posts mounted");
+    return () => console.log("posts unmounted");
+  });
   return (
-    <div>
+    <div className="content-box">
       <h2>Posts</h2>
-      <PostBox posts={posts} />
+      <label htmlFor="category">Select category:</label>
+      <select name="category" onChange={handleChange}>
+        {categoryOptions}
+      </select>
+      <PostBox
+        posts={posts}
+        currCategory={currCategory}
+        handleGetCategories={handleGetCategories}
+        handleGetPosts={handleGetPosts}
+      />
     </div>
   );
 }
