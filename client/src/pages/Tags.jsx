@@ -27,8 +27,8 @@ export default function Tags({ posts }) {
       <p>{post.content}</p>
 
       {post.tag.map((tag, i) => (
-        <nav key={i + tag} to={`/tags/${tag}`}>
-          <Link>#{tag} </Link>
+        <nav key={i + tag}>
+          <Link to={`/tags/${tag}`}>#{tag} </Link>
         </nav>
       ))}
     </div>
