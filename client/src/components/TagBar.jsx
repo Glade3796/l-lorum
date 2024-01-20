@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, } from "react-router-dom";
 
 export default function TagBar({ showNewCat }) {
   const [taglist, setTaglist] = useState([]);
   const [search, setSearch] = useState("");
 
   async function handleGetTags() {
-    const res = await fetch("http://localhost:3333/taglist");
+    const res = await fetch("https://lforum-server.onrender.com/taglist");
     const data = await res.json();
     setTaglist(data);
   }

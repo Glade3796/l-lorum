@@ -9,7 +9,7 @@ export default function NewCategory({ setShowNewCat }) {
     console.log("raw", newCategory);
     const newEntry = { name: newCategory };
     try {
-      const res = await fetch("http://localhost:3333/newcategory", {
+      const res = await fetch("https://lforum-server.onrender.com/newcategory", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify(newEntry),

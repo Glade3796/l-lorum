@@ -124,5 +124,5 @@ app.get("/posts-tags-categories", async (req, res) => {
 });
 //porty port
 app.listen(PORT, () => {
-  console.log(`up on ${PORT} `);
+  console.log(`up on https://lforum-server.onrender.com/ `);
 });

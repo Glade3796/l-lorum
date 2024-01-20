@@ -14,7 +14,7 @@ export default function App() {
   const [currCategory, setCurrCategory] = useState(0);
   //fetch categories
   async function handleGetCategories() {
-    const res = await fetch("http://localhost:3333/categories");
+    const res = await fetch("https://lforum-server.onrender.com/categories");
     const data = await res.json();
     const defCat = { id: 0, name: "ALL" };
 
@@ -34,7 +34,7 @@ export default function App() {
   console.log("map cat", categoryOptions);
   //fetch posts
   async function handleGetPosts() {
-    const res = await fetch("http://localhost:3333/posts-tags-categories");
+    const res = await fetch("https://lforum-server.onrender.com/posts-tags-categories");
     const data = await res.json();
     setPosts(data);
   }

@@ -4,7 +4,7 @@ export default function PostBox({ posts, currCategory, handleGetPosts }) {
   //populate page with posts incl tags and categories
   async function handleDelete(itemId) {
     const delItem = { id: itemId };
-    const result = await fetch("http://localhost:3333/del-post", {
+    const result = await fetch("https://lforum-server.onrender.com/del-post", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(delItem),
