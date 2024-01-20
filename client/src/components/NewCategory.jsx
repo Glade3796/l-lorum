@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function NewCategory({ setShowNewCat, handleGetCategories }) {
+export default function NewCategory({ setShowNewCat }) {
   const [newCategory, setNewCategory] = useState("");
   console.log("mount");
 

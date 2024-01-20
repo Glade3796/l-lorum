@@ -33,24 +33,24 @@ app.post("/writepost", async (req, res) => {
   try {
     const { title, content, category, tags } = req.body;
 
-    // Step 1: Insert into posts table
+    // Insert into posts table
     const postResult = await db.query(
       "INSERT INTO posts (title, content, category_id) VALUES ($1, $2, $3) RETURNING id",
       [title, content, category]
     );
     const postId = postResult.rows[0].id;
 
-    // Step 2: Insert tags into tags table and associate with post in post_tags table
+    // Insert tags into tags table and associate with post in post_tags table
     for (const tagName of tags) {
-      // Step 2.1: Insert into tags table with ON CONFLICT DO NOTHING
+      // Step 2.1: Insert into tags table
       await db.query("INSERT INTO tags (name) VALUES ($1)", [tagName]);
 
-      // Step 2.2: Retrieve tagId for existing or newly inserted tag
+      // Retrieve tagId for existing or newly inserted tag
       const tagResult = await db.query("SELECT id FROM tags WHERE name = $1", [
         tagName,
       ]);
 
-      // Step 2.3: Insert into posts_tags table
+      //  Insert into posts_tags table
       if (tagResult.rows.length > 0) {
         const tagId = tagResult.rows[0].id;
         await db.query(
