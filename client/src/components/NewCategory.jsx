@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 
 export default function NewCategory({ setShowNewCat }) {
   const [newCategory, setNewCategory] = useState("");
-  console.log("mount");
+  
 
   async function handleClick(event) {
     event.preventDefault();
-    console.log("raw", newCategory);
+    
     const newEntry = { name: newCategory };
     try {
       const res = await fetch("https://lforum-server.onrender.com/newcategory", {
@@ -23,7 +23,7 @@ export default function NewCategory({ setShowNewCat }) {
 
       if (res.ok) {
         const json = await res.json();
-        console.log("json?", json);
+        
       } else {
         console.error("Failed to add new category");
       }
@@ -36,7 +36,7 @@ export default function NewCategory({ setShowNewCat }) {
   }
   useEffect(() => {
     // handleGetCategories();
-    return () => console.log("new category unmounted");
+    r
   }, []);
   return (
     <>

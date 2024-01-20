@@ -23,7 +23,7 @@ export default function App() {
   useEffect(() => {
     handleGetCategories();
     handleGetPosts();
-    console.log("getCategories", categories);
+    ;
   }, [currCategory]);
 
   const categoryOptions = categories.map((category) => (
@@ -31,7 +31,7 @@ export default function App() {
       {category.name}
     </option>
   ));
-  console.log("map cat", categoryOptions);
+  
   //fetch posts
   async function handleGetPosts() {
     const res = await fetch("https://lforum-server.onrender.com/posts-tags-categories");

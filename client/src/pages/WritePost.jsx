@@ -17,7 +17,7 @@ export default function WritePost({
   async function handleSubmit(event) {
     setSubmitted(true);
     event.preventDefault();
-    console.log("Form values: ", formVal);
+    
     const res = await fetch("https://lforum-server.onrender.com/writepost", {
       method: "POST",
       headers: { "content-type": "application/json" },

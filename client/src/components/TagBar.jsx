@@ -12,7 +12,7 @@ export default function TagBar({ showNewCat }) {
   }
   useEffect(() => {
     handleGetTags();
-    return () => console.log("tagbar unmounted");
+    
   }, [search]);
 
   //filter tags

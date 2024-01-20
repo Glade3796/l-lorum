@@ -9,17 +9,14 @@ export default function Posts({
   handleGetCategories,
   handleGetPosts,
 }) {
-  //fetch posts
-  console.log("posts curr cat", currCategory);
+ 
   //category selection
   function handleChange(event) {
     setCurrCategory(event.target.value);
-    console.log(currCategory);
+    
   }
-  useEffect(() => {
-    console.log("posts mounted");
-    return () => console.log("posts unmounted");
-  });
+  
+  
   return (
     <div className="content-box">
       <h2>Posts</h2>
